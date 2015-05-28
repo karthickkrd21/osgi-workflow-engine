@@ -1,0 +1,38 @@
+<persistence xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0">
+	<persistence-unit name="rdmPersistenceUnit" transaction-type="JTA">
+		<provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
+		<jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/ReferenceDataServiceDS)</jta-data-source>
+		<class>com.scb.event.model.EventAction</class>
+		<class>com.scb.event.model.EventActionOutBean</class>
+		<class>com.scb.event.model.EventBean</class>
+		<class>com.scb.event.model.EventBeanAttribute</class>
+		<class>com.scb.event.model.EventFlow</class>
+		<class>com.scb.event.model.EventNode</class>
+		<class>com.scb.event.model.EventRule</class>
+		<class>com.scb.event.model.EventRuleMap</class>
+		<class>com.scb.event.model.RetryConfiguration</class>
+		<class>com.scb.event.message.model.EventMessage</class>
+		<class>com.scb.event.message.model.EventMessageAttribute</class>
+		<class>com.scb.event.message.model.EventMessageFork</class>
+		<class>com.scb.event.message.model.InterfaceMessage</class>
+		<class>com.scb.event.batch.model.BatchJobConfiguration</class>
+		<class>com.scb.event.batch.model.BatchJobParam</class>
+		<class>com.scb.event.batch.model.id.BatchJobParamKey</class>
+		<class>com.scb.event.batch.model.id.RouteConfigurationKey</class>
+		<class>com.scb.event.message.model.id.EventMessageAttributeKey</class>
+		<class>com.scb.event.message.model.id.EventMessageForkKey</class>
+		<class>com.scb.event.model.id.EventActionOutBeanKey</class>
+		<class>com.scb.event.model.id.EventBeanAttributeKey</class>
+		<class>com.scb.event.model.id.EventRuleMapKey</class>
+		<class>com.scb.event.model.id.RetryConfigurationKey</class>
+		<class>com.scb.event.model.SubscriberConfiguration</class>
+		<class>com.scb.event.batch.model.RouteConfiguration</class>
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>
+		<properties>
+			<!-- Specify dialect -->
+			<property name="openjpa.jdbc.DBDictionary" value="oracle" />
+		</properties>
+	</persistence-unit>
+</persistence>
