@@ -115,9 +115,13 @@
 						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
 						<Bundle-Description>${project.description}</Bundle-Description>
 						<Import-Package>
-							*
+							com.scb.wb.generic.repository,
+							com.scb.wb.generic.repository.impl,
+							javax.persistence,
+							org.apache.commons.collections,
+							org.apache.commons.lang.builder,
+							org.osgi.service.blueprint
 						</Import-Package>
-						<DynamicImport-Package>*</DynamicImport-Package>
 						<Export-Package>
 							com.scb.event.repository.impl,
 							com.scb.event.repository,
