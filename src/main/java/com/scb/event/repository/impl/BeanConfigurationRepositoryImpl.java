@@ -25,7 +25,6 @@ public class BeanConfigurationRepositoryImpl extends GenericCrudRepositoryImpl<E
 		this.entityManager = entityManager;
 	}
 
-	@Override
 	public EventBean findByBeanClass(final String beanClass) {
 		System.out.println("Inside find By Bean Class of Bean Configuration");
 		final TypedQuery<EventBean> query = entityManager.createNamedQuery(EventBean.EVENT_BEAN_FIND_BY_BEAN_CLASS,

@@ -27,11 +27,10 @@ public class RetryConfigurationRepositoryImpl extends
 		this.entityManager = entityManager;
 	}
 
-	@Override
 	public Iterable<String> findByFlowId(final String flowId) {
 		final List<String> keys = new ArrayList<String>();
-		final TypedQuery<RetryConfiguration> query = entityManager.createNamedQuery(RetryConfiguration.RETRY_CONFIGURATION_FIND_BY_FLOW_ID,
-				RetryConfiguration.class);
+		final TypedQuery<RetryConfiguration> query = entityManager.createNamedQuery(
+				RetryConfiguration.RETRY_CONFIGURATION_FIND_BY_FLOW_ID, RetryConfiguration.class);
 		query.setParameter("flowId", flowId);
 		final List<RetryConfiguration> retryConfigurations = query.getResultList();
 		if (CollectionUtils.isNotEmpty(retryConfigurations)) {

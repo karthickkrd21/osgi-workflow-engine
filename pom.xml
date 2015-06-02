@@ -38,30 +38,6 @@
 				<version>3.4</version>
 			</dependency>
 		  
-		    <!-- <dependency>
-			   <groupId>com.scb.commons</groupId>
-			   <artifactId>wb-svc-commons</artifactId>
-			   <version>1.0.0-SNAPSHOT</version>
-		   </dependency>
-		 
-		    <dependency>
-			   <groupId>com.scb.cache.component</groupId>
-			   <artifactId>wb-svc-cache-api</artifactId>
-			   <version>1.0.0-SNAPSHOT</version>
-		   </dependency>
-		   
-		    <dependency>
-			   <groupId>com.scb.cache.component</groupId>
-			   <artifactId>wb-svc-cache-service</artifactId>
-			   <version>1.0.0-SNAPSHOT</version>
-		   </dependency>
-		   
-		    <dependency>
-			   <groupId>com.scb.cache.component</groupId>
-			   <artifactId>wb-svc-cache-intercept-service</artifactId>
-			   <version>1.0.0-SNAPSHOT</version>
-		   </dependency> -->
-		   
 		   <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -144,7 +120,9 @@
                         <DynamicImport-Package>*</DynamicImport-Package>
                         <Export-Package>
                             com.scb.event.repository.impl,
-                            com.scb.event.repository
+                            com.scb.event.repository,
+                            com.scb.event.model,
+                            com.scb.event.model.id
                         </Export-Package>
                         <Meta-Persistence>/META-INF/persistence.xml</Meta-Persistence>
                     </instructions>

@@ -24,7 +24,6 @@ public class RuleConfigurationRepositoryImpl extends GenericCrudRepositoryImpl<E
 		this.entityManager = entityManager;
 	}
 
-	@Override
 	public Iterable<EventRuleMap> findByFlowId(final String flowId) {
 		System.out.println("Inside findBy Flow Id of Event Rule Map");
 		final TypedQuery<EventRuleMap> query = entityManager.createNamedQuery(

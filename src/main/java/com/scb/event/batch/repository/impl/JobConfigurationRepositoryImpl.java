@@ -29,7 +29,6 @@ public class JobConfigurationRepositoryImpl extends GenericCrudRepositoryImpl<Ba
 	/**
 	 * This method is used to get all the Batch Job Configurations
 	 */
-	@Override
 	public Iterable<BatchJobConfiguration> findAllJobConfiguration() {
 		final TypedQuery<BatchJobConfiguration> query = entityManager.createNamedQuery(
 				BatchJobConfiguration.FIND_ALL_BATCH_JOB_CONFIGURATION, BatchJobConfiguration.class);

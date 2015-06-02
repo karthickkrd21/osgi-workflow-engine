@@ -42,5 +42,8 @@
 	<bean id="jobConfigurationRepository" class="com.scb.event.batch.repository.impl.JobConfigurationRepositoryImpl" init-method="init">
 	<jpa:context unitname="rdmPersistenceUnit" property="entityManager" />
 	</bean>
+	
+	<service ref="ruleConfigurationRepository" interface="com.scb.event.repository.RuleConfigurationRepository" />
+	
 
 </blueprint>

@@ -29,13 +29,11 @@ public class MessageRepositoryImpl extends GenericCrudRepositoryImpl<EventMessag
 
 	public void init() {
 		System.out.println("Inside init of Message Repository");
-		final EventMessage eventMessage = new EventMessage();
-		eventMessage.setApplicationGroup("T1");
-		eventMessage.setMessageId(new BigDecimal("200"));
-		eventMessage.setCountry("India");
-		eventMessage.setEntity("entity");
-		eventMessage.setPayload("test payload type");
-		this.save(eventMessage);
+		/*
+		 * final EventMessage eventMessage = new EventMessage(); eventMessage.setApplicationGroup("T1");
+		 * eventMessage.setMessageId(new BigDecimal("2001")); eventMessage.setCountry("India");
+		 * eventMessage.setEntity("entity"); eventMessage.setPayload("test payload type"); this.save(eventMessage);
+		 */
 		System.out.println("Event Message Saved Successfully");
 	}
 }
