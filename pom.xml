@@ -1,138 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
 	<groupId>com.scb.workflow</groupId>
-	<artifactId>wb-lib-workflow-repository</artifactId>
+	<artifactId>workflow-engine</artifactId>
 	<version>1.0.0</version>
-	<packaging>bundle</packaging>
-
-	<name>wb-lib-workflow-repository</name>
-	<url>http://maven.apache.org</url>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-
-	<dependencies>
-
-		<dependency>
-			<groupId>org.apache.openjpa</groupId>
-			<artifactId>openjpa</artifactId>
-			<version>2.3.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.scb.wb</groupId>
-			<artifactId>wb-lib-transaction-api</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-		<dependency>
-			<groupId>com.scb.wb</groupId>
-			<artifactId>wb-lib-generic-repository</artifactId>
-			<version>1.0.0</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-lang3</artifactId>
-			<version>3.4</version>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.12</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
-			<version>1.10.19</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.7.12</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>1.7.12</version>
-		</dependency>
-	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>aspectj-maven-plugin</artifactId>
-				<dependencies>
-					<dependency>
-						<groupId>org.aspectj</groupId>
-						<artifactId>aspectjrt</artifactId>
-						<version>1.8.5</version>
-					</dependency>
-					<dependency>
-						<groupId>org.aspectj</groupId>
-						<artifactId>aspectjtools</artifactId>
-						<version>1.8.5</version>
-					</dependency>
-				</dependencies>
-				<configuration>
-					<showWeaveInfo>true</showWeaveInfo>
-					<Xlint>ignore</Xlint>
-					<encoding>UTF-8</encoding>
-					<verbose>false</verbose>
-					<source>1.6</source>
-					<target>1.6</target>
-					<complianceLevel>1.6</complianceLevel>
-					<aspectLibraries>
-						<aspectLibrary>
-							<groupId>com.scb.wb</groupId>
-							<artifactId>wb-lib-transaction-api</artifactId>
-						</aspectLibrary>
-					</aspectLibraries>
-				</configuration>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
-
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<version>2.3.7</version>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Include-Resource>{maven-resources}</Include-Resource>
-						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Bundle-Description>${project.description}</Bundle-Description>
-						<Import-Package>
-							com.scb.wb.generic.repository,
-							com.scb.wb.generic.repository.impl,
-							javax.persistence,
-							org.apache.commons.collections,
-							org.apache.commons.lang.builder,
-							org.osgi.service.blueprint
-						</Import-Package>
-						<Export-Package>
-							com.scb.event.repository.impl,
-							com.scb.event.repository,
-							com.scb.event.model,
-							com.scb.event.model.id
-						</Export-Package>
-						<Meta-Persistence>/META-INF/persistence.xml</Meta-Persistence>
-					</instructions>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
-
+	<packaging>pom</packaging>
+	<name>Workflow Engine Parent Module</name>
+	<description>Workflow Engine Parent Module</description>
+	<modules>
+		<module>workflow-repository</module>
+		<module>workflow-rule-engine</module>
+	</modules>
 </project>
