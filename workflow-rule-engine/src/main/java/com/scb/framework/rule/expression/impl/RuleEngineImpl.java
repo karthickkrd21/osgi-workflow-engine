@@ -52,6 +52,8 @@ public class RuleEngineImpl implements RuleEngine {
 					result = getRuleEvaluationResult(ruleExpressions, payload, resolverType);
 					ruleExecutionStatus = result ? RuleExecutionStatus.SUCCESS : RuleExecutionStatus.UNFIT;
 				}
+			} else {
+				return RuleExecutionStatus.SUCCESS;
 			}
 		}
 		return ruleExecutionStatus;
