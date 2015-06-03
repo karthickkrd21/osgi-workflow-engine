@@ -40,20 +40,16 @@ public class RuleEngineImpl implements RuleEngine {
 	@Override
 	public <T> RuleExecutionStatus evaluateRules(final String flowId, final T payload,
 			final ExpressionResolverType resolverType) {
-		System.out.println("Inside Rule Execution Status");
-		RuleExecutionStatus ruleExecutionStatus = RuleExecutionStatus.UNFIT;
+		RuleExecutionStatus ruleExecutionStatus = RuleExecutionStatus.SUCCESS;
 		if (StringUtils.isNotEmpty(flowId)) {
-			System.out.println("Inside Rule Configuration Repository: " + ruleConfigurationRepository);
-			final Iterable<EventRuleMap> ruleMap = ruleConfigurationRepository.findByFlowId(flowId);
+			final List<EventRuleMap> ruleMap = (List<EventRuleMap>) ruleConfigurationRepository.findByFlowId(flowId);
 			boolean result = false;
-			if (ruleMap != null) {
+			if (ruleMap != null && !ruleMap.isEmpty()) {
 				final List<String> ruleExpressions = buildRuleExpression(ruleMap);
-				if (ruleExpressions != null) {
+				if (ruleExpressions != null && !ruleExpressions.isEmpty()) {
 					result = getRuleEvaluationResult(ruleExpressions, payload, resolverType);
 					ruleExecutionStatus = result ? RuleExecutionStatus.SUCCESS : RuleExecutionStatus.UNFIT;
 				}
-			} else {
-				return RuleExecutionStatus.SUCCESS;
 			}
 		}
 		return ruleExecutionStatus;
