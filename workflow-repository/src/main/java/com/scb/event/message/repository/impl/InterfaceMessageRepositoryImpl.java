@@ -31,11 +31,12 @@ public class InterfaceMessageRepositoryImpl extends GenericCrudRepositoryImpl<In
 
 	public void init() {
 		System.out.println("Inside the init method of Interface Message Repository");
-		/*
-		 * final InterfaceMessage interfaceMessage = new InterfaceMessage(); interfaceMessage.setId(new
-		 * BigDecimal("1011")); interfaceMessage.setCaptureSystem("capture"); interfaceMessage.setCorrelationId("test");
-		 * interfaceMessage.setPayload("payload sample"); this.save(interfaceMessage);
-		 */
+		final InterfaceMessage interfaceMessage = new InterfaceMessage();
+		// interfaceMessage.setId(new BigDecimal("1011"));
+		interfaceMessage.setCaptureSystem("capture");
+		interfaceMessage.setCorrelationId("test");
+		interfaceMessage.setPayload("payload sample");
+		this.save(interfaceMessage);
 		System.out.println("Save of Init Message Repository done...");
 	}
 

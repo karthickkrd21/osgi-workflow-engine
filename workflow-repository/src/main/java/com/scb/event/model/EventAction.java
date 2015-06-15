@@ -5,10 +5,11 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.builder.HashCodeBuilder;
 
 @Entity
 @Table(name = "EVENT_ACTION")
@@ -18,7 +19,6 @@ public class EventAction implements Serializable {
 
 	@Id
 	@Column(name = "ACTION_ID", length = 120)
-	@GeneratedValue
 	private String id;
 
 	@Column(name = "ACTION_DESC", length = 1024)
@@ -53,12 +53,7 @@ public class EventAction implements Serializable {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((eventActionOutBeans == null) ? 0 : eventActionOutBeans.hashCode());
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
+		return new HashCodeBuilder().append("id").append("description").toHashCode();
 	}
 
 	@Override
@@ -74,11 +69,6 @@ public class EventAction implements Serializable {
 			if (other.description != null)
 				return false;
 		} else if (!description.equals(other.description))
-			return false;
-		if (eventActionOutBeans == null) {
-			if (other.eventActionOutBeans != null)
-				return false;
-		} else if (!eventActionOutBeans.equals(other.eventActionOutBeans))
 			return false;
 		if (id == null) {
 			if (other.id != null)

@@ -53,6 +53,18 @@ public class ConfigurationRepositoryImpl extends GenericCrudRepositoryImpl<Event
 		for (final EventFlow eventflow : eventFlow1) {
 			System.out.println(" Event Flow Description inside for loop: flow id: " + eventflow.getId());
 		}
+		System.out.println("**** START FIND ALL NOT EMPTY SOURCE NODES ******");
+		final List<String> flowIds = this.findAllNotEmptySourceNodes();
+		for (final String flowId : flowIds) {
+			System.out.println("Flow ID: " + flowId);
+		}
+		System.out.println("**** END FIND ALL NOT EMPTY SOURCE NODES ******");
+
 	}
 
+	public List<String> findAllNotEmptySourceNodes() {
+		final TypedQuery<String> query = entityManager.createNamedQuery(EventFlow.FIND_ALL_NON_EMPTY_SOURCE_NODE,
+				String.class);
+		return query.getResultList();
+	}
 }

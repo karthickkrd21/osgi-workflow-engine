@@ -5,7 +5,6 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -24,7 +23,6 @@ public class EventBean implements Serializable {
 
 	@Id
 	@Column(name = "BEAN_ID", length = 120)
-	@GeneratedValue
 	private String id;
 
 	@Column(name = "BEAN_CLASS", length = 1024)

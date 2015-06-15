@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -16,7 +15,6 @@ public class EventNode implements Serializable {
 
 	@Id
 	@Column(name = "NODE_ID", length = 120)
-	@GeneratedValue
 	private String id;
 
 	@Column(name = "NODE_DESC", length = 1024)

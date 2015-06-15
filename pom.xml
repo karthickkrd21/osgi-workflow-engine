@@ -10,5 +10,6 @@
 	<modules>
 		<module>workflow-repository</module>
 		<module>workflow-rule-engine</module>
+		<module>workflow-integration-module</module>
 	</modules>
 </project>

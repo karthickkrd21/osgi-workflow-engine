@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -20,7 +19,8 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 @Entity
 @NamedQueries({
 		@NamedQuery(name = EventFlow.EVENT_FLOW_FIND_BY_FLOW_ID, query = "SELECT c FROM EventFlow c left join fetch c.sourceNode left join fetch c.targetNode left join fetch c.action where c.id=:flowId"),
-		@NamedQuery(name = EventFlow.FIND_BY_SOURCE_NODE_ID, query = "SELECT c FROM EventFlow c left join fetch c.sourceNode left join fetch c.targetNode left join fetch c.action  WHERE c.sourceNode.id = :sourceNodeId") })
+		@NamedQuery(name = EventFlow.FIND_BY_SOURCE_NODE_ID, query = "SELECT c FROM EventFlow c left join fetch c.sourceNode left join fetch c.targetNode left join fetch c.action  WHERE c.sourceNode.id = :sourceNodeId"),
+		@NamedQuery(name = EventFlow.FIND_ALL_NON_EMPTY_SOURCE_NODE, query = "SELECT c.id FROM EventFlow c left join fetch c.sourceNode left join fetch c.targetNode left join fetch c.action  WHERE c.sourceNode.id IS NOT NULL") })
 @Table(name = "EVENT_FLOW", uniqueConstraints = @UniqueConstraint(columnNames = { "ACTION_ID", "SOURCE_NODE_ID",
 		"TARGET_NODE_ID" }))
 public class EventFlow implements Serializable {
@@ -31,9 +31,10 @@ public class EventFlow implements Serializable {
 
 	public static final String FIND_BY_SOURCE_NODE_ID = "findBySourceNodeId";
 
+	public static final String FIND_ALL_NON_EMPTY_SOURCE_NODE = "findAllNonEmptySourceNodes";
+
 	@Id
 	@Column(name = "FLOW_ID", length = 120)
-	@GeneratedValue
 	private String id;
 
 	@Column(name = "FLOW_DESC", length = 1024)

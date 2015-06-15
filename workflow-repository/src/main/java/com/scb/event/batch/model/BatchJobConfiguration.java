@@ -8,9 +8,11 @@ import java.util.Set;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -33,7 +35,8 @@ public class BatchJobConfiguration implements Serializable {
 
 	@Id
 	@Column(name = "JOB_ID")
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "BATCH_JOB_SEQUENCE")
+	@SequenceGenerator(name = "BATCH_JOB_SEQUENCE", sequenceName = "EVENT_MESSAGE_SEQ")
 	private BigInteger jobId;
 
 	@Column(name = "GROUP_NAME", length = 256, nullable = false)

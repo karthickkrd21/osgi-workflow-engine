@@ -5,7 +5,5 @@ import com.scb.wb.generic.repository.GenericCrudRepository;
 
 public interface SubscriberConfigurationRepository extends GenericCrudRepository<SubscriberConfiguration, String> {
 
-	/*@Override
-	@Cacheable("subscriberConfiguration")*/
-	public Iterable<SubscriberConfiguration> findAll();
+	public Iterable<SubscriberConfiguration> findAll() throws ClassNotFoundException;
 }

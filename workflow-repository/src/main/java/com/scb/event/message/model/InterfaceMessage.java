@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -23,7 +24,8 @@ public class InterfaceMessage implements Serializable {
 	private static final long serialVersionUID = -4303955287853182824L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "INT_MSG_SEQ")
+	@SequenceGenerator(name = "INT_MSG_SEQ", sequenceName = "EVENT_MESSAGE_SEQ")
 	@Column(name = "INT_MSG_ID")
 	private BigDecimal id;
 

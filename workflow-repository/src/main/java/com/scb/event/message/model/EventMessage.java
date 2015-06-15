@@ -11,11 +11,13 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -31,14 +33,15 @@ public class EventMessage implements Serializable {
 
 	@Id
 	@Column(name = "MESSAGE_ID", precision = 38, scale = 0)
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "EVENT_MSG_SEQ")
+	@SequenceGenerator(name = "EVENT_MSG_SEQ", sequenceName = "EVENT_MESSAGE_SEQ")
 	private BigDecimal messageId;
 
 	@OneToOne
 	@JoinColumn(name = "NODE_ID", insertable = true, updatable = true)
 	private EventNode node;
 
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "ACTION_ID", insertable = true, updatable = true)
 	private EventAction action;
 
@@ -432,20 +435,10 @@ public class EventMessage implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		final EventMessage other = (EventMessage) obj;
-		if (action == null) {
-			if (other.action != null)
-				return false;
-		} else if (!action.equals(other.action))
-			return false;
 		if (applicationGroup == null) {
 			if (other.applicationGroup != null)
 				return false;
 		} else if (!applicationGroup.equals(other.applicationGroup))
-			return false;
-		if (attributes == null) {
-			if (other.attributes != null)
-				return false;
-		} else if (!attributes.equals(other.attributes))
 			return false;
 		if (country == null) {
 			if (other.country != null)
@@ -482,16 +475,6 @@ public class EventMessage implements Serializable {
 				return false;
 		} else if (!module.equals(other.module))
 			return false;
-		if (node == null) {
-			if (other.node != null)
-				return false;
-		} else if (!node.equals(other.node))
-			return false;
-		if (originalMessage == null) {
-			if (other.originalMessage != null)
-				return false;
-		} else if (!originalMessage.equals(other.originalMessage))
-			return false;
 		if (payload == null) {
 			if (other.payload != null)
 				return false;
@@ -503,11 +486,6 @@ public class EventMessage implements Serializable {
 		} else if (!payloadSubType.equals(other.payloadSubType))
 			return false;
 		if (payloadType != other.payloadType)
-			return false;
-		if (previousMessage == null) {
-			if (other.previousMessage != null)
-				return false;
-		} else if (!previousMessage.equals(other.previousMessage))
 			return false;
 		if (published != other.published)
 			return false;

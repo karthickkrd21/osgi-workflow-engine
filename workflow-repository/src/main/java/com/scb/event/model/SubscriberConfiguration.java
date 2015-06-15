@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,7 +18,6 @@ public class SubscriberConfiguration implements Serializable {
 	private static final long serialVersionUID = 3351311666977447933L;
 
 	@Id
-	@GeneratedValue
 	@Column(name = "SUBSCRIBER_ID")
 	private String subscriberId;
 

@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+	xmlns:cxf="http://cxf.apache.org/blueprint/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0"
+	xmlns:jpa="http://aries.apache.org/xmlns/jpa/v1.0.0" xmlns:tx="http://aries.apache.org/xmlns/transactions/v1.0.0"
+	xsi:schemaLocation="
+      	http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
+		http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.0.0.xsd">
+
+	<bean id="listenerInitializer" class="com.scb.event.workflow.listener.ListenerInitializer"
+		init-method="init">
+		<property name="container" ref="blueprintContainer" />
+		<property name="subscriberConfigurationRepository">
+			<reference
+				interface="com.scb.event.repository.SubscriberConfigurationRepository"
+				availability="mandatory" />
+		</property>
+		<property name="configurationRepository">
+			<reference interface="com.scb.event.repository.ConfigurationRepository"
+				availability="mandatory" />
+		</property>
+	</bean>
+
+	<bean id="eventMessageListener" class="com.scb.event.workflow.listener.EventMessageListener"
+		scope="prototype">
+		<property name="eventInvocator" ref="eventInvocator" />
+		<property name="messageRepository">
+			<reference interface="com.scb.event.message.repository.MessageRepository"
+				availability="mandatory" />
+		</property>
+		<property name="messageForkRepository">
+			<reference interface="com.scb.event.message.repository.MessageForkRepository"
+				availability="mandatory" />
+		</property>
+		<property name="jacksonPayloadProcessor" ref="jacksonPayloadProcessor" />
+		<property name="errorHandler" ref="defaultErrorHandler" />
+	</bean>
+
+	<bean id="defaultErrorHandler" class="com.scb.event.workflow.util.DefaultErrorHandler" />
+
+	<bean id="eventInvocator" class="com.scb.event.workflow.core.EventInvocatorImpl">
+		<property name="configurationRepository">
+			<reference interface="com.scb.event.repository.ConfigurationRepository"
+				availability="mandatory" />
+		</property>
+		<property name="beanConfigurationRepository">
+			<reference interface="com.scb.event.repository.BeanConfigurationRepository"
+				availability="mandatory" />
+		</property>
+		<property name="messageRepository">
+			<reference interface="com.scb.event.message.repository.MessageRepository"
+				availability="mandatory" />
+		</property>
+		<property name="messageBuilder" ref="messageBuilder">
+		</property>
+		<property name="messageAttributeRepository">
+			<reference
+				interface="com.scb.event.message.repository.MessageAttributeRepository"
+				availability="mandatory" />
+		</property>
+		<property name="messageForkRepository">
+			<reference interface="com.scb.event.message.repository.MessageForkRepository"
+				availability="mandatory" />
+		</property>
+		<property name="eventMessagePublisher" ref="eventMessagePublisher" />
+		<property name="processor" ref="eventProcessor" />
+		<property name="jacksonPayloadProcessor" ref="jacksonPayloadProcessor" />
+		<property name="retryConfigurationRepository">
+			<reference interface="com.scb.event.repository.RetryConfigurationRepository"
+				availability="mandatory" />
+		</property>
+	</bean>
+
+	<bean id="messageBuilder" class="com.scb.event.workflow.core.MessageBuilder">
+		<property name="messageRepository">
+			<reference interface="com.scb.event.message.repository.MessageRepository"
+				availability="mandatory" />
+		</property>
+	</bean>
+
+	<bean id="eventMessagePublisher" class="com.scb.event.workflow.publisher.EventMessagePublisher"
+		init-method="init">
+		<property name="messageForkRepository">
+			<reference interface="com.scb.event.message.repository.MessageForkRepository"
+				availability="mandatory" />
+		</property>
+		<property name="subscriberConfigurationRepository">
+			<reference
+				interface="com.scb.event.repository.SubscriberConfigurationRepository"
+				availability="mandatory" />
+		</property>
+	</bean>
+
+	<bean id="eventProcessor" class="com.scb.event.workflow.core.EventProcessorImpl">
+		<property name="ruleEngine">
+			<reference interface="com.scb.framework.rule.expression.RuleEngine"
+				availability="mandatory" />
+		</property>
+		<property name="actionInvocator" ref="actionInvocator" />
+	</bean>
+
+	<bean id="jacksonPayloadProcessor" class="com.scb.event.workflow.util.JacksonPayloadProcessor">
+		<property name="objectMapper" ref="objectMapper" />
+	</bean>
+
+	<bean id="objectMapper" class="org.codehaus.jackson.map.ObjectMapper"
+		scope="prototype" />
+
+	<bean id="executeActionTask"
+		class="com.scb.event.workflow.action.concurrent.ExecuteActionTaskImpl" />
+	
+	<bean id="actionInvocator" class="com.scb.event.workflow.action.ActionInvocatorImpl">
+		<property name="container" ref="blueprintContainer" />
+	</bean>
+
+	<bean id="DEAL_PERSISTENCE_ACTION" class="com.scb.event.workflow.action.DefaultActionImpl" />
+
+	<bean id="dealPipelineEntity" class="com.scb.onewb.sp.dealpipeline.model.DealPipelineEntity"
+		init-method="init">
+		<property name="eventInvocator" ref="eventInvocator" />
+	</bean>
+
+</blueprint>

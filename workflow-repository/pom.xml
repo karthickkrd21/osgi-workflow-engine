@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-<parent>
+	<parent>
 		<groupId>com.scb.workflow</groupId>
 		<artifactId>workflow-engine</artifactId>
 		<version>1.0.0</version>
@@ -130,7 +130,15 @@
 							com.scb.event.repository.impl,
 							com.scb.event.repository,
 							com.scb.event.model,
-							com.scb.event.model.id
+							com.scb.event.model.id,
+							com.scb.event.batch.model,
+							com.scb.event.batch.model.id,
+							com.scb.event.batch.repository,
+							com.scb.event.batch.repository.impl,
+							com.scb.event.message.model,
+							com.scb.event.message.model.id,
+							com.scb.event.message.repository,
+							com.scb.event.message.repository.impl
 						</Export-Package>
 						<Meta-Persistence>/META-INF/persistence.xml</Meta-Persistence>
 					</instructions>

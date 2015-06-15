@@ -3,9 +3,11 @@ package com.scb.event.repository.impl;
 import javax.persistence.EntityManager;
 
 import com.scb.event.model.SubscriberConfiguration;
+import com.scb.event.repository.SubscriberConfigurationRepository;
 import com.scb.wb.generic.repository.impl.GenericCrudRepositoryImpl;
 
-public class SubscriberConfigurationRepositoryImpl extends GenericCrudRepositoryImpl<SubscriberConfiguration, String> {
+public class SubscriberConfigurationRepositoryImpl extends GenericCrudRepositoryImpl<SubscriberConfiguration, String>
+		implements SubscriberConfigurationRepository {
 
 	private EntityManager entityManager;
 
